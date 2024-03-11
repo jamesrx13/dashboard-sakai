@@ -1,5 +1,7 @@
 import { Injectable, effect, signal } from '@angular/core';
 import { Subject } from 'rxjs';
+import { appConfigurations } from 'src/environments/environment';
+import { StorageManagger } from 'src/utilities/storage';
 
 export interface AppConfig {
     inputStyle: string;
@@ -52,6 +54,13 @@ export class LayoutService {
     overlayOpen$ = this.overlayOpen.asObservable();
 
     constructor() {
+
+        const manager = new StorageManagger;
+
+        if(!manager.getItem(appConfigurations.userPreferences)) {
+            manager.setItem(appConfigurations.userPreferences, JSON.stringify(this._config))
+        }        
+
         effect(() => {
             const config = this.config();
             if (this.updateStyle(config)) {
@@ -63,7 +72,9 @@ export class LayoutService {
     }
 
     updateStyle(config: AppConfig) {
-        localStorage.setItem('userPreferences', JSON.stringify(config));
+        
+        (new StorageManagger).setItem(appConfigurations.userPreferences, JSON.stringify(config))
+
         return (
             config.theme !== this._config.theme ||
             config.colorScheme !== this._config.colorScheme

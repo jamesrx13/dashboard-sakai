@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { LayoutService } from '../service/app.layout.service';
 import { MenuService } from '../app.menu.service';
+import { StorageManagger } from 'src/utilities/storage';
+import { appConfigurations } from 'src/environments/environment';
 
 @Component({
     selector: 'app-config',
@@ -101,7 +103,7 @@ export class AppConfigComponent {
 
 
     setUserPreferences() {
-        const userPreferences = JSON.parse(localStorage.getItem('userPreferences'));
+        const userPreferences = (new StorageManagger).getItem(appConfigurations.userPreferences, true);
 
         if( userPreferences ) {
             this.layoutService.config.update(() => userPreferences);
