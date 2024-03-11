@@ -8,6 +8,17 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 })
 export class LandingComponent {
 
-    constructor(public layoutService: LayoutService, public router: Router) { }
+    constructor(public layoutService: LayoutService, public router: Router) {
+        this.setUserPreferences()
+    }
+
+
+    setUserPreferences() {
+        const userPreferences = JSON.parse(localStorage.getItem('userPreferences'));
+
+        if( userPreferences ) {
+            this.layoutService.config.update(() => userPreferences);
+        }
+    }
     
 }
