@@ -63,6 +63,7 @@ export class LayoutService {
     }
 
     updateStyle(config: AppConfig) {
+        localStorage.setItem('userPreferences', JSON.stringify(config));
         return (
             config.theme !== this._config.theme ||
             config.colorScheme !== this._config.colorScheme

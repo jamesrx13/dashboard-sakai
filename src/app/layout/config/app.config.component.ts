@@ -14,7 +14,9 @@ export class AppConfigComponent {
     constructor(
         public layoutService: LayoutService,
         public menuService: MenuService
-    ) {}
+    ) {
+        this.setUserPreferences()
+    }
 
     get visible(): boolean {
         return this.layoutService.state.configSidebarVisible;
@@ -96,4 +98,14 @@ export class AppConfigComponent {
     incrementScale() {
         this.scale++;
     }
+
+
+    setUserPreferences() {
+        const userPreferences = JSON.parse(localStorage.getItem('userPreferences'));
+
+        if( userPreferences ) {
+            this.layoutService.config.update(() => userPreferences);
+        }
+    }
+
 }
