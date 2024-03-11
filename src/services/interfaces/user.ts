@@ -7,5 +7,5 @@ export interface UserInterface {
     created_at:        Date;
     updated_at:        null;
     statusPlaceholder: string;
-    rolPlaceholder:    string;
+    rolPlaceholder?:    string;
 }

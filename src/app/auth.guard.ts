@@ -1,9 +1,10 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthServices } from 'src/services/auth.service';
 
 const authGuard: CanActivateFn = () => {
 
-  const isAuth: boolean = false
+  const isAuth: boolean = (new AuthServices()).isAuthenticated()
   const router = inject(Router);
 
   if(!isAuth) {   
@@ -15,7 +16,7 @@ const authGuard: CanActivateFn = () => {
 
 const authGuardLogin: CanActivateFn = () => {
 
-  const isAuth: boolean = false
+  const isAuth: boolean = (new AuthServices()).isAuthenticated()
   const router = inject(Router);
 
   if(isAuth) {   

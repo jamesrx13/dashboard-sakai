@@ -5,3 +5,8 @@ export interface LoginInterface {
     AuthToken: string;
     data:      UserInterface;
 }
+
+export interface VerifyLoginInterface {
+    status:    boolean;
+    data:      UserInterface;
+}
