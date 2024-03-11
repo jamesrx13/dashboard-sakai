@@ -7,7 +7,7 @@
                     <span class="text-600 font-medium">Sign in to continue</span>
                 </div>
 
-                <div>
+                <form onsubmit="loginSubmit($event)">
                     <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
                     <input id="email" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
 
@@ -25,7 +25,7 @@
                     <div class="flex justify-content-center mt-5">
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer" [routerLink]="['/auth/register']" style="color: var(--primary-color)">Don't have an account?</a>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

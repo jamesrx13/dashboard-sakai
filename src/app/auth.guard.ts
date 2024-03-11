@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 
 const authGuard: CanActivateFn = () => {
 
-  const isAuth: boolean = true
+  const isAuth: boolean = false
   const router = inject(Router);
 
   if(!isAuth) {   
@@ -15,7 +15,7 @@ const authGuard: CanActivateFn = () => {
 
 const authGuardLogin: CanActivateFn = () => {
 
-  const isAuth: boolean = true
+  const isAuth: boolean = false
   const router = inject(Router);
 
   if(isAuth) {   

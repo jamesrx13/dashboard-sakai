@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { appConfigurations } from 'src/environments/environment';
+import { AuthServices } from 'src/services/auth.service';
 import { StorageManagger } from 'src/utilities/storage';
 
 @Component({
@@ -21,6 +22,8 @@ export class LoginComponent {
 
     password!: string;
 
+    services: AuthServices = new AuthServices();
+
     constructor(public layoutService: LayoutService) {
         this.setUserPreferences()
     }
@@ -31,5 +34,13 @@ export class LoginComponent {
         if( userPreferences ) {
             this.layoutService.config.update(() => userPreferences);
         }
+    }
+
+    loginSubmit(event: Event) {
+        event.preventDefault();
+        const formData = new FormData(event.target as HTMLFormElement);
+
+        this.services.logIn(formData)
+
     }
 }
