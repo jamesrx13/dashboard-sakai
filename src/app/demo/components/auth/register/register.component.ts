@@ -19,5 +19,15 @@ export class RegisterComponent {
 
     password!: string;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService) {
+        this.setUserPreferences()
+    }
+    
+    setUserPreferences() {
+        const userPreferences = JSON.parse(localStorage.getItem('userPreferences'));
+
+        if( userPreferences ) {
+            this.layoutService.config.update(() => userPreferences);
+        }
+    }
 }
