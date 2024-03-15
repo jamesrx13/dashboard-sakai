@@ -5,10 +5,12 @@ import { appConfigurations } from "src/environments/environment";
 import { StorageManagger } from "src/utilities/storage";
 import { Router } from "@angular/router";
 import { inject } from "@angular/core";
+import { MessageToastService } from "./toast.service";
 
 export class AuthServices {
 
     router: Router = inject(Router);    
+    toast: MessageToastService = inject(MessageToastService);
 
     public logIn(formData: FormData, finalCallable: Function = () => {}): ErrorInterface|LoginInterface {
 
@@ -27,9 +29,8 @@ export class AuthServices {
                 this.router.navigate(['/dashboard']);
 
             } else {
-                //TODO: Show toast
                 resp = resp as ErrorInterface
-                alert(resp.msg);
+                this.toast.showErrorViaToast('Error', resp.msg);
             }
 
             finalCallable();
@@ -37,7 +38,7 @@ export class AuthServices {
             return resp;
 
         }).catch(error => {
-            //TODO: Show toast
+            this.toast.showErrorViaToast('Error', error);
             console.error(error);
         })
         
