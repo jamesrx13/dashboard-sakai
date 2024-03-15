@@ -9,6 +9,7 @@ export const appConfigurations = {
   authUrl: new URL('user/login', apiMainUrl),
   sesionVerify: new URL('user/verifyToken', apiMainUrl),
   // --- General ---
+  applicationName: 'Dissof Dashboard',
   // --- Auth ---
   // --- LocalSorage ---
   userPreferences: 'userPreferences',
