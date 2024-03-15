@@ -38,8 +38,7 @@
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer"
                             style="color: var(--primary-color)">Forgot password?</a>
                     </div>
-                    <button pButton pRipple label="Sign In" class="w-full p-3 text-xl"
-                        [routerLink]="['/dashboard']"></button>
+                    <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" [loading]="loading"></button>
                     <div class="flex justify-content-center mt-5">
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer"
                             [routerLink]="['/auth/register']" style="color: var(--primary-color)">Don't have an

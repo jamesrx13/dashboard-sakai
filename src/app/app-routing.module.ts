@@ -1,8 +1,8 @@
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
-import { authGuard, authGuardLogin } from './auth.guard';
+import { authGuard, authGuardLogin} from './auth.guard';
 
 @NgModule({
     imports: [

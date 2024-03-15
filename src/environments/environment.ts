@@ -16,6 +16,5 @@ export const appConfigurations = {
   authHeader: 'x-auth-token',
   // -- User --
   user: 'user',
-  userAuthToken: 'userAuthToken', 
 }
 

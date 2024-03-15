@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { appConfigurations } from 'src/environments/environment';
 import { AuthServices } from 'src/services/auth.service';
 import { StorageManagger } from 'src/utilities/storage';
-import { ToastManagger } from 'src/utilities/toast';
 
 @Component({
     selector: 'app-login',
@@ -23,6 +21,7 @@ import { ToastManagger } from 'src/utilities/toast';
 })
 export class LoginComponent {
     loginForm: FormGroup;
+    loading = false;
 
     valCheck: string[] = ['remember'];
 
@@ -54,13 +53,17 @@ export class LoginComponent {
 
     loginSubmit() {
         if (this.loginForm.valid) {
+            
+            this.loading = true
 
             const formData = new FormData();
 
             formData.set('user_name', this.loginForm.get('user_name')?.value);
             formData.set('password', this.loginForm.get('password')?.value);
 
-            this.services.logIn(formData);
+            this.services.logIn(formData, () => {
+                this.loading = false
+            });
             
         } else {
             //TODO: Show toast

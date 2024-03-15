@@ -1,17 +1,17 @@
 import { appConfigurations } from "src/environments/environment"
 import { StorageManagger } from "./storage"
 
-const WithOutAuthRequest = (url: URL, headers: object, body?: FormData) => {
+const WithOutAuthRequest = (url: URL, requestOpt: object, body?: FormData) => {
     
     if(body){
-        headers = {
-            ...headers,
+        requestOpt = {
+            ...requestOpt,
             body,
         }  
     }
 
     return new Promise((resolve, reject) => {
-        fetch(url, headers)
+        fetch(url, requestOpt)
         .then(response => {
             resolve(response.json())
         })
@@ -21,20 +21,22 @@ const WithOutAuthRequest = (url: URL, headers: object, body?: FormData) => {
     })
 }
 
-const WithAuthRequest = (url: URL, headers: object, body?: FormData) => {
+const WithAuthRequest = (url: URL, requestOpt: object, body?: FormData) => {
     const jwt = (new StorageManagger).getItem(appConfigurations.jwtAuth)
 
-    headers = {
-        ...headers,
-        [appConfigurations.authHeader]: jwt
+    requestOpt = {
+        ...requestOpt,
+        headers: {
+            [appConfigurations.authHeader]: jwt
+        }
     }  
     
     if(body){
-        headers = {
-            ...headers,
+        requestOpt = {
+            ...requestOpt,
             body,
         }  
-    }
+    }   
 
     return new Promise((resolve, reject) => {
 
@@ -42,7 +44,7 @@ const WithAuthRequest = (url: URL, headers: object, body?: FormData) => {
             reject('Token not found')
         }
 
-        fetch(url, headers)
+        fetch(url, requestOpt)
         .then(response => {
             resolve(response.json())
         })
