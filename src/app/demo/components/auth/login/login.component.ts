@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { appConfigurations } from 'src/environments/environment';
 import { AuthServices } from 'src/services/auth.service';
+import { MessageToastService } from 'src/services/toast.service';
 import { StorageManagger } from 'src/utilities/storage';
 
 @Component({
@@ -32,6 +33,7 @@ export class LoginComponent {
     constructor(
         public layoutService: LayoutService,
         private form: FormBuilder,
+        private messageService: MessageToastService
     ) {
         this.setUserPreferences();
         this.loginForm = this.form.group({
@@ -66,8 +68,7 @@ export class LoginComponent {
             });
             
         } else {
-            //TODO: Show toast
-            alert('Form is not valid');
+            this.messageService.showErrorViaToast('Error', 'Form is not valid');
         }
     }
 
