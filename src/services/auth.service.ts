@@ -1,4 +1,4 @@
-import { WithOutAuthRequest } from "src/utilities/request";
+import { WithAuthRequest, WithOutAuthRequest } from "src/utilities/request";
 import { LoginInterface, VerifyLoginInterface } from "./interfaces/auth";
 import { ErrorInterface } from "./interfaces/error";
 import { appConfigurations } from "src/environments/environment";
@@ -22,6 +22,8 @@ export class AuthServices {
                 resp = resp as LoginInterface
                 
                 const storageMager = new StorageManagger();
+
+                this.toast.showSuccessViaToast('Welcome to', appConfigurations.applicationName);
 
                 storageMager.setItem(appConfigurations.jwtAuth, resp.AuthToken);
                 storageMager.setItem(appConfigurations.user, JSON.stringify(resp.data));
@@ -57,6 +59,20 @@ export class AuthServices {
 
         return isAuth
 
+    }
+
+    public validateSesion(): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            
+            WithAuthRequest(appConfigurations.sesionVerify, {
+                method: 'POST'
+            }).then((resp: VerifyLoginInterface) => {
+                resolve(resp.status)
+            }).catch(error => {
+                resolve(false)
+            })
+
+        })
     }
 
 }
