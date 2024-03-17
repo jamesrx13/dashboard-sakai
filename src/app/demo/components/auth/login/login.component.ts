@@ -22,13 +22,14 @@ import { StorageManagger } from 'src/utilities/storage';
 })
 export class LoginComponent {
     loginForm: FormGroup;
-    loading = false;
 
-    valCheck: string[] = ['remember'];
+    loading = false;
 
     password!: string;
 
     services: AuthServices = new AuthServices();
+
+    storage: StorageManagger = new StorageManagger();
 
     constructor(
         public layoutService: LayoutService,
@@ -37,8 +38,9 @@ export class LoginComponent {
     ) {
         this.setUserPreferences();
         this.loginForm = this.form.group({
-            user_name: ['', [Validators.required]],
+            user_name: [this.storage.getItem(appConfigurations.userName), [Validators.required]],
             password: ['', [Validators.required]],
+            remember: ['', []],
         });
     }
 
@@ -58,9 +60,15 @@ export class LoginComponent {
             
             this.loading = true
 
+            const userName = this.loginForm.get('user_name')?.value
+
+            if(this.loginForm.get('remember')?.value){
+                this.storage.setItem(appConfigurations.userName, userName)
+            }            
+
             const formData = new FormData();
 
-            formData.set('user_name', this.loginForm.get('user_name')?.value);
+            formData.set('user_name', userName);
             formData.set('password', this.loginForm.get('password')?.value);
 
             this.services.logIn(formData, () => {

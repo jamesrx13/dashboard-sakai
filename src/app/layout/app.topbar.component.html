@@ -25,5 +25,5 @@
 </div>
 
 <p-sidebar [(visible)]="sideBarProfile" position="right">
-    <app-usersidebarcontent></app-usersidebarcontent>
+    <app-usersidebarcontent (needClose)="sideBarProfile = false" ></app-usersidebarcontent>
 </p-sidebar>

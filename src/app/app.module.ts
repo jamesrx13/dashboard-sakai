@@ -13,6 +13,7 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { SessionManagger } from 'src/utilities/session';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -27,6 +28,7 @@ import { ToastModule } from 'primeng/toast';
         PhotoService,
         ProductService,
         MessageService,
+        SessionManagger,
     ],
     bootstrap: [AppComponent],
 })

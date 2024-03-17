@@ -8,7 +8,9 @@ import { SessionManagger } from 'src/utilities/session';
 })
 export class ProfileComponent {
 
-    userData: UserInterface = (new SessionManagger).getUserSesionData()
+    constructor(private sesionManager: SessionManagger){}
+
+    userData: UserInterface = this.sesionManager.getUserSesionData()
 
 
 }

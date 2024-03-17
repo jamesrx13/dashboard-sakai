@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { SessionManagger } from 'src/utilities/session';
@@ -11,10 +11,16 @@ import { SessionManagger } from 'src/utilities/session';
 })
 
 export class UserSideBarComponent {
+    
+    userName: string;
 
-    userName: string = (new SessionManagger).getUserSesionData()?.user_name;
+    @Output() needClose = new EventEmitter();
 
-    constructor(private confirmationService: ConfirmationService, private router: Router){}
+    @ViewChildren('li') li!: ElementRef[]
+
+    constructor(private confirmationService: ConfirmationService, private router: Router, private sessionManager: SessionManagger){
+        this.userName = this.sessionManager.getUserSesionData().user_name;
+    }
 
     logout() {
         this.confirmationService.confirm({
@@ -24,13 +30,14 @@ export class UserSideBarComponent {
             acceptIcon:"none",
             rejectIcon:"none",
             rejectButtonStyleClass:"p-button-text",
-            accept: () => {
-                (new SessionManagger).logout();
-                this.router.navigate(['/auth']);
-            },
+            accept: () => this.sessionManager.logout(),
             reject: () => {
             }
         });
+    }
+
+    closeSideBar(){
+        this.needClose.emit();
     }
 
 }

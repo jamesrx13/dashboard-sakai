@@ -3,14 +3,14 @@ import { LoginInterface, VerifyLoginInterface } from "./interfaces/auth";
 import { ErrorInterface } from "./interfaces/error";
 import { appConfigurations } from "src/environments/environment";
 import { StorageManagger } from "src/utilities/storage";
-import { Router } from "@angular/router";
 import { inject } from "@angular/core";
 import { MessageToastService } from "./toast.service";
+import { SessionManagger } from "src/utilities/session";
 
 export class AuthServices {
 
-    router: Router = inject(Router);    
     toast: MessageToastService = inject(MessageToastService);
+    sessionManager: SessionManagger = inject(SessionManagger);
 
     public logIn(formData: FormData, finalCallable: Function = () => {}): ErrorInterface|LoginInterface {
 
@@ -21,14 +21,9 @@ export class AuthServices {
             if(resp.status){
                 resp = resp as LoginInterface
                 
-                const storageMager = new StorageManagger();
+                this.sessionManager.InitSesion(resp.AuthToken, resp.data);
 
                 this.toast.showSuccessViaToast('Welcome to', appConfigurations.applicationName);
-
-                storageMager.setItem(appConfigurations.jwtAuth, resp.AuthToken);
-                storageMager.setItem(appConfigurations.user, JSON.stringify(resp.data));
-
-                this.router.navigate(['/dashboard']);
 
             } else {
                 resp = resp as ErrorInterface
