@@ -1,5 +1,6 @@
 import { UserInterface } from "src/services/interfaces/user";
 import { StorageManagger } from "./storage";
+import { appConfigurations } from "src/environments/environment";
 
 export class SessionManagger {
 
@@ -13,5 +14,10 @@ export class SessionManagger {
             return null;
         }
         
+    }
+
+    public logout() {
+        (new StorageManagger).removeItem(appConfigurations.user);   
+        (new StorageManagger).removeItem(appConfigurations.jwtAuth);   
     }
 }

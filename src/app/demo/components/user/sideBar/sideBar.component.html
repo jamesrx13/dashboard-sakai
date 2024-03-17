@@ -7,12 +7,20 @@
         <span class="user-name" >{{userName}}</span>
     </div>
 
-    <div class="options-list">
-        <div class="opt" [routerLink]="['/dashboard/user']">
+    <ul class="options-list">
+        <li class="opt" [routerLink]="['/dashboard/user']">
             <i class="pi pi-users"></i>
             <span>Profile</span>
-        </div>
-    </div>
+        </li>
+        <li class="opt" (click)="logout()">
+            <i class="pi pi-times"></i>
+            <span>Salir</span>
+        </li>
+    </ul>
+
+    <!-- Overlay -->
+    <p-confirmDialog [style]="{width: '350px'}"></p-confirmDialog>
+
 
 
 </section>

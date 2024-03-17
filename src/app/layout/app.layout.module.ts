@@ -18,6 +18,7 @@ import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { UserSideBarComponent } from '../demo/components/user/sideBar/sideBar.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { UserSideBarComponent } from '../demo/components/user/sideBar/sideBar.co
         RippleModule,
         RouterModule,
         AppConfigModule,
+        ConfirmDialogModule,
     ],
     exports: [AppLayoutComponent]
 })
