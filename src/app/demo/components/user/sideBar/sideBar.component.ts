@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { SessionManagger } from 'src/utilities/session';
@@ -15,8 +15,6 @@ export class UserSideBarComponent {
     userName: string;
 
     @Output() needClose = new EventEmitter();
-
-    @ViewChildren('li') li!: ElementRef[]
 
     constructor(private confirmationService: ConfirmationService, private router: Router, private sessionManager: SessionManagger){
         this.userName = this.sessionManager.getUserSesionData().user_name;

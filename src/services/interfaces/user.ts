@@ -8,4 +8,5 @@ export interface UserInterface {
     updated_at:        null;
     statusPlaceholder: string;
     rolPlaceholder?:    string;
+    profilePhoto?:      string;
 }

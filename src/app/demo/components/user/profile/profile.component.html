@@ -4,16 +4,57 @@
         <section>
             <span class="block text-6xl font-bold mb-1">{{userData.name}}</span>
             <div class="text-6xl text-primary font-bold mb-3">{{userData.last_name}}</div>
-            <div class="mt-0 mb-4 text-700 line-height-3">
-                <ul>
-                    <li>Email: {{userData.email}}</li>
-                    <li>Status: {{userData.statusPlaceholder}}</li>
-                    <li>Rol: {{userData.rolPlaceholder}}</li>  
-                </ul>
-            </div>
         </section>
     </div>
     <div class="col-12 md:col-6 overflow-hidden">
-        <img src="assets/demo/images/user/defauld_user_image.jpg" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+        <img src="{{userData.profilePhoto ? userData.profilePhoto : 'assets/demo/images/user/defauld_user_image.jpg'}}" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
     </div>
 </div>
+
+<br>
+
+<div class="grid">
+    <div class="col-12">
+		<form class="card" [formGroup]="formController">
+			<h5>Edit Profile</h5>
+			<div class="p-fluid p-formgrid grid">
+				<div class="field col-12 md:col-6">
+					<label htmlFor="user_name">User name</label>
+					<input pInputText id="user_name" type="text" formControlName="user_name"/>
+				</div>
+				<div class="field col-12 md:col-6">
+                    <label htmlFor="name">Name</label>
+					<input pInputTextarea id="name" formControlName="name" type="text"/>
+				</div>
+				<div class="field col-12 md:col-6">
+                    <label htmlFor="last_name">Last name</label>
+					<input pInputTextarea id="last_name" formControlName="last_name" type="text"/>
+				</div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="email">Email</label>
+                    <input pInputText type="email" id="email" formControlName="email"/>
+                </div>
+
+                <!-- Overlay -->
+                <p-confirmDialog [style]="{width: '350px'}">
+                    <ng-template pTemplate="message">
+                        <input pInputText type="password" id="password" formControlName="password" placeholder="Enter your password"/>
+                    </ng-template>
+                </p-confirmDialog>
+
+                <div class="field col-12 flex align-items-end justify-content-end">
+                    <span (click)="showComfirmation()" class="" pButton type="submit" label="Save" class="mt-2" style="max-width: 200px;"></span>
+                </div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<br>
+
+<!-- user_name
+email
+name
+last_name
+password
+profilePhoto -->
