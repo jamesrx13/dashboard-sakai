@@ -10,6 +10,7 @@ export const appConfigurations = {
   authUrl: new URL('user/login', apiMainUrl),
   sesionVerify: new URL('user/verifyToken', apiMainUrl),
   userLogout: new URL('user/logout', apiMainUrl),
+  userChangePassword: new URL('user/changeMyPassword', apiMainUrl),
   //User
   userEdit: new URL('user/updateMyUser', apiMainUrl),
   // --- General ---

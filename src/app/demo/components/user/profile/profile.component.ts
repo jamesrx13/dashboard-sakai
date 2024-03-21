@@ -17,6 +17,7 @@ import { StorageManagger } from 'src/utilities/storage';
 export class ProfileComponent implements OnInit {
 
     formController: FormGroup;
+    formPasswordController: FormGroup;
     userData: UserInterface;
 
     isEnterPassword: boolean = false;
@@ -36,6 +37,12 @@ export class ProfileComponent implements OnInit {
             name: [this.userData.name, [Validators.required]],
             last_name: [this.userData.last_name, [Validators.required]],
             password: ['',  [Validators.required]],
+        })
+
+        this.formPasswordController = this.from.group({
+            currentPassword: ['',  [Validators.required]],
+            newPassword: ['',  [Validators.required]],
+            confirmPassword: ['',  [Validators.required]],
         })
     }
 
@@ -57,6 +64,7 @@ export class ProfileComponent implements OnInit {
             rejectIcon:"none",
             rejectButtonStyleClass:"p-button-text",
             acceptVisible: this.isEnterPassword,
+            key: 'confirmPassword',
             accept: () => {
                 if (this.formController.valid) {
 
@@ -78,8 +86,50 @@ export class ProfileComponent implements OnInit {
                             location.reload();                        
                         } else {
                             this.messageService.showErrorViaToast('Error', response.msg);
+                            this.formController.get('password').setValue('')
                         }
 
+                    }).catch((error) => {
+                        this.messageService.showErrorViaToast('Error', error);
+                        console.log(error);
+                    });
+
+                } else {
+                    this.messageService.showErrorViaToast('Error', 'Form is not valid');
+                }
+            },
+            reject: () => {
+            }
+        });
+    }
+
+    changePassword(){
+        this.confirmationService.confirm({
+            header: 'Please complete the fields',
+            acceptIcon:"none",
+            rejectIcon:"none",
+            rejectButtonStyleClass:"p-button-text",
+            key: 'changePassword',
+            accept: () => {
+                if (this.formPasswordController.valid) {
+
+                    const formData = new FormData();
+
+                    formData.set('currentPassword', this.formPasswordController.get('currentPassword')?.value);
+                    formData.set('newPassword', this.formPasswordController.get('newPassword')?.value);
+                    formData.set('confirmPassword', this.formPasswordController.get('confirmPassword')?.value);
+
+                    WithAuthRequest(appConfigurations.userChangePassword, {
+                        method: 'POST',
+                    }, formData).then((response: any) => {
+                        if(response.status){
+                            this.messageService.showSuccessViaToast('Success', response.msg);
+                            this.formPasswordController.get('currentPassword').setValue('')
+                            this.formPasswordController.get('newPassword').setValue('')
+                            this.formPasswordController.get('confirmPassword').setValue('')
+                        } else {
+                            this.messageService.showErrorViaToast('Error', response.msg);
+                        }
                     }).catch((error) => {
                         this.messageService.showErrorViaToast('Error', error);
                         console.log(error);

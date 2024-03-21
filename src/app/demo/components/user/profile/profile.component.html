@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<br>
+<button (click)="changePassword()" pButton label="Change password" class="mt-4 mb-4" style="max-width: 200px;"></button>
 
 <div class="grid">
     <div class="col-12">
@@ -36,7 +36,7 @@
                 </div>
 
                 <!-- Overlay -->
-                <p-confirmDialog [style]="{width: '350px'}">
+                <p-confirmDialog key="confirmPassword" [style]="{width: '350px'}">
                     <ng-template pTemplate="message">
                         <input pInputText type="password" id="password" formControlName="password" placeholder="Enter your password"/>
                     </ng-template>
@@ -52,9 +52,26 @@
 
 <br>
 
-<!-- user_name
-email
-name
-last_name
-password
-profilePhoto -->
+<!-- Overlay -->
+<p-confirmDialog key="changePassword" [style]="{maxWidth:'calc(100vw - 20px)', height: '500px'}">
+    <ng-template pTemplate="message">
+        <form class="p-fluid p-formgrid grid" [formGroup]="formPasswordController" style="width: 100%; margin: 0 auto;">
+
+            <div class="field col-12">
+                <label htmlFor="currentPassword">Current Password</label>
+                <input pInputText type="password" id="currentPassword" formControlName="currentPassword" placeholder="Enter your current password"/>
+            </div>
+
+            <div class="field col-12">
+                <label htmlFor="newPassword">New Password</label>
+                <p-password id="newPassword" formControlName="newPassword" [(ngModel)]="newPassword" [toggleMask]="true" placeholder="Enter your new password"></p-password>
+            </div>
+
+            <div class="field col-12">
+                <label htmlFor="confirmPassword">Comfirm new Password</label>
+                <p-password id="confirmPassword" formControlName="confirmPassword" [(ngModel)]="confirmPassword" [toggleMask]="true" placeholder="Confirm your new password" ></p-password>
+            </div>
+
+        </form>
+    </ng-template>
+</p-confirmDialog>

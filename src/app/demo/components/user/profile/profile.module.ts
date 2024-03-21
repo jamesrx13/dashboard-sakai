@@ -15,6 +15,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 		InputTextModule,
 		ConfirmDialogModule,
 		ReactiveFormsModule,
+		PasswordModule,
     ],
     declarations: [ProfileComponent]
 })

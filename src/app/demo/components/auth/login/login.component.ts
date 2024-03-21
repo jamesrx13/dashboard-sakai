@@ -27,6 +27,8 @@ export class LoginComponent {
 
     password!: string;
 
+    checked: boolean = false;
+
     services: AuthServices = new AuthServices();
 
     storage: StorageManagger = new StorageManagger();
@@ -42,6 +44,10 @@ export class LoginComponent {
             password: ['', [Validators.required]],
             remember: ['', []],
         });
+
+        if(this.storage.getItem(appConfigurations.userName)){
+            this.checked = true
+        }  
     }
 
     setUserPreferences() {
