@@ -2,9 +2,13 @@
 
     <div class="user-information">
         <div class="user-image" style="background-color: var(--primary-color);">
-            <i class="pi pi-user"></i>
+            @if(userData.profilePhoto != null) {
+                <img src="{{userData.profilePhoto}}" alt="Profile image">
+            } @else {
+                <i class="pi pi-user"></i>
+            }
         </div>
-        <span class="user-name" >{{userName}}</span>
+        <span class="user-name" >{{userData.user_name}}</span>
     </div>
 
     <ul class="options-list">

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
+import { UserInterface } from 'src/services/interfaces/user';
 import { SessionManagger } from 'src/utilities/session';
 
 @Component({
@@ -12,12 +13,12 @@ import { SessionManagger } from 'src/utilities/session';
 
 export class UserSideBarComponent {
     
-    userName: string;
+    userData: UserInterface;
 
     @Output() needClose = new EventEmitter();
 
     constructor(private confirmationService: ConfirmationService, private router: Router, private sessionManager: SessionManagger){
-        this.userName = this.sessionManager.getUserSesionData().user_name;
+        this.userData = this.sessionManager.getUserSesionData();
     }
 
     logout() {
