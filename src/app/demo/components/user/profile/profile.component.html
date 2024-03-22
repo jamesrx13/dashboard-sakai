@@ -6,8 +6,9 @@
             <div class="text-6xl text-primary font-bold mb-3">{{userData.last_name}}</div>
         </section>
     </div>
-    <div class="col-12 md:col-6 overflow-hidden">
-        <img src="{{userData.profilePhoto ? userData.profilePhoto : 'assets/demo/images/user/defauld_user_image.jpg'}}" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+    <div class="col-12 md:col-6 overflow-hidden" style="position: relative;">
+        <img src="{{userData.profilePhoto ? userData.profilePhoto : 'assets/demo/images/user/defauld_user_image.jpg'}}" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%); max-height: 500px;">
+        <button (click)="changeProfileImage()" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded" style="position: absolute; bottom: 0; right: 0;"></button>
     </div>
 </div>
 

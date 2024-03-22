@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
     formController: FormGroup;
     formPasswordController: FormGroup;
     userData: UserInterface;
+    imageFileUpload: File;
 
     isEnterPassword: boolean = false;
 
@@ -27,7 +28,6 @@ export class ProfileComponent implements OnInit {
         private confirmationService: ConfirmationService, 
         private from: FormBuilder,
         private messageService: MessageToastService,
-        private storage: StorageManagger,
     ){
         this.userData= this.sesionManager.getUserSesionData()
 
@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
         })
     }
 
-    showComfirmation() {
+    showComfirmation(fileImageUpdate?: any) {
         this.confirmationService.confirm({
             header: 'Please enter your password to complete this action',
             acceptIcon:"none",
@@ -76,14 +76,17 @@ export class ProfileComponent implements OnInit {
                     formData.set('last_name', this.formController.get('last_name')?.value);
                     formData.set('password', this.formController.get('password')?.value);
 
+                    if(this.imageFileUpload){
+                        formData.append('profilePhoto', this.imageFileUpload);
+                    }
+
                     WithAuthRequest(appConfigurations.userEdit, {
                         method: 'POST',
                     }, formData).then((response: any) => {
 
                         if(response.status){
                             this.messageService.showSuccessViaToast('Success', response.msg);
-                            this.storage.setItem(appConfigurations.user, JSON.stringify(response.data));    
-                            location.reload();                        
+                            this.sesionManager.ReloadSession(response.data);
                         } else {
                             this.messageService.showErrorViaToast('Error', response.msg);
                             this.formController.get('password').setValue('')
@@ -98,8 +101,6 @@ export class ProfileComponent implements OnInit {
                     this.messageService.showErrorViaToast('Error', 'Form is not valid');
                 }
             },
-            reject: () => {
-            }
         });
     }
 
@@ -144,5 +145,16 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    changeProfileImage(){
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = false;
+        input.onchange = () => {
+            this.imageFileUpload = input.files[0]           
+            this.showComfirmation();
+        }
+        input.click();
+    }
 
 }

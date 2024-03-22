@@ -47,4 +47,9 @@ export class SessionManagger {
         this.storage.setItem(appConfigurations.user, JSON.stringify(userData));
         this.router.navigate(['/dashboard']);
     }
+
+    public ReloadSession(newUserData: UserInterface) {
+        this.storage.setItem(appConfigurations.user, JSON.stringify(newUserData));    
+        location.reload();  
+    }
 }
