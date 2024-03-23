@@ -13,8 +13,16 @@
 
     <ul class="options-list">
         <li class="opt" [routerLink]="['/dashboard/user']" (click)="closeSideBar()">
-            <i class="pi pi-users"></i>
+            <i class="pi pi-user"></i>
             <span>Profile</span>
+        </li>
+        <li class="opt" [routerLink]="['/dashboard/user/users-manager']" (click)="closeSideBar()">
+            <i class="pi pi-users"></i>
+            <span>Users manager</span>
+        </li>
+        <li class="opt" [routerLink]="['/dashboard/user/sesion-manager']" (click)="closeSideBar()">
+            <i class="pi pi-cog"></i>
+            <span>Sesion manager</span>
         </li>
         <li class="opt" (click)="logout()">
             <i class="pi pi-times"></i>
