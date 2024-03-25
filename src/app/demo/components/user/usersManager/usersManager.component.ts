@@ -1,10 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
-import { Table } from 'primeng/table';
-import { Customer, Representative } from 'src/app/demo/api/customer';
-import { Product } from 'src/app/demo/api/product';
-import { CustomerService } from 'src/app/demo/service/customer.service';
-import { ProductService } from 'src/app/demo/service/product.service';
 import { appConfigurations } from 'src/environments/environment';
 import { UserInterface } from 'src/services/interfaces/user';
 import { MessageToastService } from 'src/services/toast.service';
