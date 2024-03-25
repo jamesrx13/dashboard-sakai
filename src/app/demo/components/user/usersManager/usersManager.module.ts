@@ -15,11 +15,15 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PasswordModule } from 'primeng/password';
+import { TableDemoRoutingModule } from '../../uikit/table/tabledemo-routing.module';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
     imports: [
         CommonModule,
         UsersManagerRoutingModule,
+		TableModule,
 		FormsModule,
 		AutoCompleteModule,
 		CalendarModule,
@@ -34,6 +38,8 @@ import { PasswordModule } from 'primeng/password';
 		ConfirmDialogModule,
 		ReactiveFormsModule,
 		PasswordModule,
+		TableDemoRoutingModule,
+		PaginatorModule,
     ],
     declarations: [UsersManagerComponent]
 })

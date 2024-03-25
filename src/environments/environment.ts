@@ -11,6 +11,7 @@ export const appConfigurations = {
   sesionVerify: new URL('user/verifyToken', apiMainUrl),
   userLogout: new URL('user/logout', apiMainUrl),
   userChangePassword: new URL('user/changeMyPassword', apiMainUrl),
+  userList: new URL('user/list/', apiMainUrl),
   //User
   userEdit: new URL('user/updateMyUser', apiMainUrl),
   // --- General ---
