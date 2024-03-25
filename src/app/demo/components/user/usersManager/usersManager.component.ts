@@ -11,10 +11,6 @@ import { MessageToastService } from 'src/services/toast.service';
 import { WithAuthRequest } from 'src/utilities/request';
 import { StorageManagger } from 'src/utilities/storage';
 
-interface expandedRows {
-    [key: string]: boolean;
-}
-
 @Component({
     selector: 'app-usersManager',
     templateUrl: './usersManager.component.html',
