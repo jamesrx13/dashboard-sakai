@@ -1,4 +1,6 @@
-<div class="card">
+<p-button label="Add new user" icon="pi pi-user-plus" badgeClass="p-badge-danger" outlined="true"></p-button>
+
+<div class="card mt-3">
 	<h5>User Manager</h5>
 
 	<p-table #dt1 [value]="allUsers" dataKey="id" [rows]="countData" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="false" responsiveLayout="scroll">
