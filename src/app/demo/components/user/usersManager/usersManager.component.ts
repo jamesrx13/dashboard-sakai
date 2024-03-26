@@ -22,6 +22,7 @@ export class UsersManagerComponent {
     loading: boolean = true;
 
     userVisibleDialog: boolean = false;
+    useraddVisibleDialog: boolean = false;
     userToedit: UserInterface = {} as UserInterface;
     formController: FormGroup;
     formPasswordController: FormGroup;
@@ -29,6 +30,12 @@ export class UsersManagerComponent {
     imageFileUpload: File;
 
     userToeditIsActive: boolean = false;
+
+
+    dropdownItems = [
+        { name: 'Actived', code: 'Actived' },
+        { name: 'Inactived', code: 'Inactived' }
+    ];
 
     @ViewChild('filter') filter!: ElementRef;
 
@@ -78,6 +85,11 @@ export class UsersManagerComponent {
         this.filter.nativeElement.value = '';
         this.loadTable();
     }
+
+    addUser(){
+        this.useraddVisibleDialog = true;
+    }
+
 
     loadTable(){
 
