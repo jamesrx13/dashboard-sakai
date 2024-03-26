@@ -155,7 +155,7 @@ export class UsersManagerComponent {
                     }, formData).then((response: any) => {
 
                         if(response.status){
-                            this.messageService.showSuccessViaToast('Success', response.msg);
+                            this.messageService.showSuccessViaToast('Success', 'User updated');
                             this.formController.get('validate_password').setValue('')
                             this.userVisibleDialog = false;
                             this.loadTable();
@@ -246,5 +246,18 @@ export class UsersManagerComponent {
             }
         });
     }
+
+    changeProfileImage(){
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = false;
+        input.onchange = () => {
+            this.imageFileUpload = input.files[0]           
+            this.showComfirmation();
+        }
+        input.click();
+    }
+
 
 }
