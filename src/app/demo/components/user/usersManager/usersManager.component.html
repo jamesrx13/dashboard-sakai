@@ -67,7 +67,7 @@
 					{{user.id}}
 				</td>
 				<td class="flex align-items-center">
-					<img src="assets/demo/images/user/defauld_user_image.jpg" width="40" style="border-radius: 100%;"/>
+					<img src="{{user.profilePhoto ? user.profilePhoto : 'assets/demo/images/user/defauld_user_image.jpg'}}" width="40" style="border-radius: 100%;"/>
 					<span class="image-text ml-2">{{user.name + ' ' + user.last_name}}</span>
 				</td>
 				<td>
@@ -80,10 +80,10 @@
 					{{user.rolPlaceholder}}
 				</td>
 				<td>
-					<span >{{user.statusPlaceholder}}</span>
+					<p-tag severity="{{user.status == 1 ? 'success' : 'danger'}}" value="{{user.statusPlaceholder}}"></p-tag>
 				</td>
 				<td>
-					<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" ></button>
+					<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showUserOverley(user)" ></button>
 				</td>
 			</tr>
 		</ng-template>
@@ -107,5 +107,91 @@
 		[totalRecords]="totalPages"
   ></p-paginator>  
 </div>
+
+<p-dialog header="Edit User" [(visible)]="userVisibleDialog" [style]="{ maxWidth: 'calc(100vw - 20px)' }">
+	<div class="grid grid-nogutter surface-section text-800">
+		<div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+			<section>
+				<span class="block text-6xl font-bold mb-1">{{userToedit.name }} {{userToedit.last_name}}</span>
+				<div class="text-2xl text-primary font-bold mb-3">{{userToedit.rolPlaceholder}}</div>
+			</section>
+		</div>
+		<div class="col-12 md:col-6 overflow-hidden" style="position: relative;">
+			<img src="{{userToedit.profilePhoto ? userToedit.profilePhoto : 'assets/demo/images/user/defauld_user_image.jpg'}}" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%); max-height: 500px;">
+			<button  pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded" style="position: absolute; bottom: 0; right: 0;"></button>
+		</div>
+	</div>
+
+	<div class="flex justify-content-between align-items-center">
+		<button pButton label="Change password" class="mt-4 mb-4" style="max-width: 200px;" (click)="changePassword()"></button>
+		<div class="flex align-items-center">
+			<p-tag class="mr-2" severity="{{userToeditIsActive ? 'success' : 'danger'}}" value="{{userToeditIsActive ? 'Active' : 'Inactive'}}"></p-tag>
+			<p-inputSwitch [(ngModel)]="userToeditIsActive" (onChange)="changeStatus()" ></p-inputSwitch>
+		</div>
+	</div>
+
+
+	<div class="grid" >
+		<div class="col-12">
+			<form class="card"  [formGroup]="formController" >
+				<h5>Edit Profile</h5>
+				<input type="hidden" formControlName="id">
+				<div class="p-fluid p-formgrid grid">
+					<div class="field col-12 md:col-6">
+						<label htmlFor="user_name">User name</label>
+						<input pInputText id="user_name" type="text" formControlName="user_name"/>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="name">Name</label>
+						<input pInputTextarea id="name" formControlName="name" type="text"/>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="last_name">Last name</label>
+						<input pInputTextarea id="last_name" formControlName="last_name" type="text"/>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="email">Email</label>
+						<input pInputText type="email" id="email" formControlName="email"/>
+					</div>
+	
+					<!-- Overlay -->
+					<p-confirmDialog key="confirmPassword" [style]="{width: '350px'}">
+						<ng-template pTemplate="message">
+							<input pInputText type="password" id="password" formControlName="validate_password" placeholder="Enter your password"/>
+						</ng-template>
+					</p-confirmDialog>
+	
+					<div class="field col-12 flex align-items-end justify-content-end">
+						<span (click)="showComfirmation()" class="" pButton type="submit" label="Save" class="mt-2" style="max-width: 200px;"></span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</p-dialog>
+
+<!-- Overlay -->
+<p-confirmDialog key="changePassword" [style]="{maxWidth:'calc(100vw - 20px)', height: '500px'}">
+    <ng-template pTemplate="message">
+        <form class="p-fluid p-formgrid grid" [formGroup]="formPasswordController" style="width: 100%; margin: 0 auto;">
+			<input type="hidden" name="id" formControlName="id">
+            <div class="field col-12">
+                <label htmlFor="validate_password">Admin Password</label>
+                <input pInputText type="password" id="validate_password" formControlName="validate_password" placeholder="Enter your admin password"/>
+            </div>
+
+            <div class="field col-12">
+                <label htmlFor="new_password">New Password</label>
+                <p-password id="new_password" formControlName="new_password" [toggleMask]="true" placeholder="Enter the new password" ></p-password>
+            </div>
+
+            <div class="field col-12">
+                <label htmlFor="comfirm_password">Comfirm new Password</label>
+                <p-password id="comfirm_password" formControlName="comfirm_password" [toggleMask]="true" placeholder="Confirm the new password" ></p-password>
+            </div>
+
+        </form>
+    </ng-template>
+</p-confirmDialog>
 
 <br>

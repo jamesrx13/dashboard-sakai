@@ -18,6 +18,9 @@ import { PasswordModule } from 'primeng/password';
 import { TableDemoRoutingModule } from '../../uikit/table/tabledemo-routing.module';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { DialogModule } from 'primeng/dialog';
+import { TagModule } from 'primeng/tag';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
     imports: [
@@ -40,6 +43,9 @@ import { PaginatorModule } from 'primeng/paginator';
 		PasswordModule,
 		TableDemoRoutingModule,
 		PaginatorModule,
+		DialogModule,
+		TagModule, 
+		InputSwitchModule, 
     ],
     declarations: [UsersManagerComponent]
 })

@@ -9,4 +9,6 @@ export interface UserInterface {
     statusPlaceholder: string;
     rolPlaceholder?:    string;
     profilePhoto?:      string;
+    rol:               number|string;
+    status:            number|string;
 }
