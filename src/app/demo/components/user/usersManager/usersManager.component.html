@@ -1,47 +1,4 @@
-<p-button (click)="addUser()"  label="Add new user" icon="pi pi-user-plus" badgeClass="p-badge-danger" outlined="true"></p-button>
-
-
-<p-dialog header="Edit User" [(visible)]="userVisibleDialog" [style]="{ maxWidth: 'calc(100vw - 20px)' }">
-
-<ng-template pTemplate="content" [ngOutletContext]="context">
-	<div class="col-12">
-		<div class="card">
-			<h5>Advanced</h5>
-			<div class="p-fluid p-formgrid grid">
-				<div class="field col-12 md:col-6">
-					<label htmlFor="username">username</label>
-					<input pInputText id="username" type="text" />
-				</div>
-				<div class="field col-12 md:col-6">
-					<label htmlFor="email">email</label>
-					<input pInputText id="email" type="text" />
-				</div>
-				<div class="field col-12">
-					<label htmlFor="password">password</label>
-					<input pInputTextarea id="password" rows="4" />
-				</div>
-				<div class="field col-12 md:col-6">
-					<label htmlFor="name">name</label>
-					<input pInputText id="name" type="text" />
-				</div>
-				<div class="field col-12 md:col-6">
-					<label htmlFor="lastname">last name</label>
-					<input pInputText id="lastname" type="text" />
-				</div>
-				<div class="field col-12 md:col-3">
-					<label htmlFor="state">State</label>
-					<p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
-				</div>
-			</div>
-		</div>
-	</div
-	
-	>
-
-</ng-template>
-
-</p-dialog>
-
+<p-button (click)="addUser()" label="Add new user" icon="pi pi-user-plus" badgeClass="p-badge-danger" outlined="true"></p-button>
 
 
 <div class="card mt-3">
@@ -54,7 +11,7 @@
 				<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear()"></button>
 				<span class="p-input-icon-left mb-2">
 					<i class="pi pi-search"></i>
-					<input pInputText type="text" #filter (input)="onGlobalFilter()" placeholder="Search Keyword" class="w-full"/>
+					<input pInputText type="text" #filter (input)="onGlobalFilter()" placeholder="Search Keyword" class="w-full" />
 				</span>
 			</div>
 		</ng-template>
@@ -113,7 +70,7 @@
 					{{user.id}}
 				</td>
 				<td class="flex align-items-center">
-					<img src="{{user.profilePhoto ? user.profilePhoto : 'assets/demo/images/user/defauld_user_image.jpg'}}" width="40" style="border-radius: 100%; max-width: 40px; max-height: 40px; min-height: 40px;"/>
+					<img src="{{user.profilePhoto ? user.profilePhoto : 'assets/demo/images/user/defauld_user_image.jpg'}}" width="40" style="border-radius: 100%; max-width: 40px; max-height: 40px; min-height: 40px;" />
 					<span class="image-text ml-2">{{user.name + ' ' + user.last_name}}</span>
 				</td>
 				<td>
@@ -129,7 +86,7 @@
 					<p-tag severity="{{user.status == 1 ? 'success' : 'danger'}}" value="{{user.statusPlaceholder}}"></p-tag>
 				</td>
 				<td>
-					<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showUserOverley(user)" ></button>
+					<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showUserOverley(user)"></button>
 				</td>
 			</tr>
 		</ng-template>
@@ -147,11 +104,7 @@
 		</ng-template>
 
 	</p-table>
-	<p-paginator
-		(onPageChange)="handlePagination($event)"
-		[rows]="countData"
-		[totalRecords]="totalPages"
-  ></p-paginator>  
+	<p-paginator (onPageChange)="handlePagination($event)" [rows]="countData" [totalRecords]="totalPages"></p-paginator>
 </div>
 
 <p-dialog header="Edit User" [(visible)]="userVisibleDialog" [style]="{ maxWidth: 'calc(100vw - 20px)' }">
@@ -172,41 +125,41 @@
 		<button pButton label="Change password" class="mt-4 mb-4" style="max-width: 200px;" (click)="changePassword()"></button>
 		<div class="flex align-items-center">
 			<p-tag class="mr-2" severity="{{userToeditIsActive ? 'success' : 'danger'}}" value="{{userToeditIsActive ? 'Active' : 'Inactive'}}"></p-tag>
-			<p-inputSwitch [(ngModel)]="userToeditIsActive" (onChange)="changeStatus()" ></p-inputSwitch>
+			<p-inputSwitch [(ngModel)]="userToeditIsActive" (onChange)="changeStatus()"></p-inputSwitch>
 		</div>
 	</div>
 
 
-	<div class="grid" >
+	<div class="grid">
 		<div class="col-12">
-			<form class="card"  [formGroup]="formController" >
+			<form class="card" [formGroup]="formController">
 				<h5>Edit Profile</h5>
 				<input type="hidden" formControlName="id">
 				<div class="p-fluid p-formgrid grid">
 					<div class="field col-12 md:col-6">
 						<label htmlFor="user_name">User name</label>
-						<input pInputText id="user_name" type="text" formControlName="user_name"/>
+						<input pInputText id="user_name" type="text" formControlName="user_name" />
 					</div>
 					<div class="field col-12 md:col-6">
 						<label htmlFor="name">Name</label>
-						<input pInputTextarea id="name" formControlName="name" type="text"/>
+						<input pInputTextarea id="name" formControlName="name" type="text" />
 					</div>
 					<div class="field col-12 md:col-6">
 						<label htmlFor="last_name">Last name</label>
-						<input pInputTextarea id="last_name" formControlName="last_name" type="text"/>
+						<input pInputTextarea id="last_name" formControlName="last_name" type="text" />
 					</div>
 					<div class="field col-12 md:col-6">
 						<label htmlFor="email">Email</label>
-						<input pInputText type="email" id="email" formControlName="email"/>
+						<input pInputText type="email" id="email" formControlName="email" />
 					</div>
-	
+
 					<!-- Overlay -->
 					<p-confirmDialog key="confirmPassword" [style]="{width: '350px'}">
 						<ng-template pTemplate="message">
-							<input pInputText type="password" id="password" formControlName="validate_password" placeholder="Enter your password"/>
+							<input pInputText type="password" id="password" formControlName="validate_password" placeholder="Enter your password" />
 						</ng-template>
 					</p-confirmDialog>
-	
+
 					<div class="field col-12 flex align-items-end justify-content-end">
 						<span (click)="showComfirmation()" class="" pButton type="submit" label="Save" class="mt-2" style="max-width: 200px;"></span>
 					</div>
@@ -218,26 +171,64 @@
 
 <!-- Overlay -->
 <p-confirmDialog key="changePassword" [style]="{maxWidth:'calc(100vw - 20px)', height: '500px'}">
-    <ng-template pTemplate="message">
-        <form class="p-fluid p-formgrid grid" [formGroup]="formPasswordController" style="width: 100%; margin: 0 auto;">
+	<ng-template pTemplate="message">
+		<form class="p-fluid p-formgrid grid" [formGroup]="formPasswordController" style="width: 100%; margin: 0 auto;">
 			<input type="hidden" name="id" formControlName="id">
-            <div class="field col-12">
-                <label htmlFor="validate_password">Admin Password</label>
-                <input pInputText type="password" id="validate_password" formControlName="validate_password" placeholder="Enter your admin password"/>
-            </div>
+			<div class="field col-12">
+				<label htmlFor="validate_password">Admin Password</label>
+				<input pInputText type="password" id="validate_password" formControlName="validate_password" placeholder="Enter your admin password" />
+			</div>
 
-            <div class="field col-12">
-                <label htmlFor="new_password">New Password</label>
-                <p-password id="new_password" formControlName="new_password" [toggleMask]="true" placeholder="Enter the new password" ></p-password>
-            </div>
+			<div class="field col-12">
+				<label htmlFor="new_password">New Password</label>
+				<p-password id="new_password" formControlName="new_password" [toggleMask]="true" placeholder="Enter the new password"></p-password>
+			</div>
 
-            <div class="field col-12">
-                <label htmlFor="comfirm_password">Comfirm new Password</label>
-                <p-password id="comfirm_password" formControlName="comfirm_password" [toggleMask]="true" placeholder="Confirm the new password" ></p-password>
-            </div>
+			<div class="field col-12">
+				<label htmlFor="comfirm_password">Comfirm new Password</label>
+				<p-password id="comfirm_password" formControlName="comfirm_password" [toggleMask]="true" placeholder="Confirm the new password"></p-password>
+			</div>
 
-        </form>
-    </ng-template>
+		</form>
+	</ng-template>
 </p-confirmDialog>
+
+<p-dialog header="Add user" [(visible)]="useraddVisibleDialog" [style]="{ maxWidth: 'calc(100vw - 20px)' }">
+	<ng-template pTemplate="content">
+		<div class="col-12">
+			<form class="card" [formGroup]="formCreateUserController" >
+				<div class="p-fluid p-formgrid grid">
+					<div class="field col-12 md:col-6">
+						<label htmlFor="user_name">User name</label>
+						<input pInputText id="user_name" type="text" placeholder="Enter the user name" formControlName="user_name"/>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="email">Email</label>
+						<input pInputText id="email" type="email" placeholder="Enter the email" formControlName="email"/>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="password">Password</label>
+						<p-password id="password" formControlName="password" [toggleMask]="true" placeholder="Enter the password"></p-password>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="name">Name</label>
+						<input pInputText id="name" type="text" placeholder="Enter the name" formControlName="name"/>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="lastname">Last name</label>
+						<input pInputText id="lastname" type="text" placeholder="Enter the last name" formControlName="last_name"/>
+					</div>
+					<div class="field col-12 md:col-6">
+						<label htmlFor="state">Rol</label>
+						<p-dropdown [options]="dropdownItems" optionLabel="name" formControlName="rol" placeholder="Select a rol"></p-dropdown>
+					</div>
+					<div class="field col-12 flex align-items-end justify-content-end">
+						<span (click)="addNewUser()" class="" pButton type="submit" label="Save" class="mt-2" style="max-width: 200px;"></span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</ng-template>
+</p-dialog>
 
 <br>

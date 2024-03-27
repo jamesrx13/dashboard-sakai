@@ -7,6 +7,11 @@ import { MessageToastService } from 'src/services/toast.service';
 import { WithAuthRequest } from 'src/utilities/request';
 import { StorageManagger } from 'src/utilities/storage';
 
+interface UserRol {
+    name: string;
+    code: string;
+}
+
 @Component({
     selector: 'app-usersManager',
     templateUrl: './usersManager.component.html',
@@ -14,28 +19,27 @@ import { StorageManagger } from 'src/utilities/storage';
 })
 
 export class UsersManagerComponent {
-
+    // Listado y páginación
     allUsers: UserInterface[] = [];
     countData: number = 10;
     page: number = 1;
     totalPages: number = 0;
     loading: boolean = true;
 
+    // Edición de usuarios
+    userToeditIsActive: boolean = false;
     userVisibleDialog: boolean = false;
-    useraddVisibleDialog: boolean = false;
     userToedit: UserInterface = {} as UserInterface;
     formController: FormGroup;
     formPasswordController: FormGroup;
     isEnterPassword: boolean = false;
     imageFileUpload: File;
+    
+    // Creación de usuarios
+    useraddVisibleDialog: boolean = true;
+    formCreateUserController: FormGroup;
 
-    userToeditIsActive: boolean = false;
-
-
-    dropdownItems = [
-        { name: 'Actived', code: 'Actived' },
-        { name: 'Inactived', code: 'Inactived' }
-    ];
+    dropdownItems: Array<UserRol> = [];
 
     @ViewChild('filter') filter!: ElementRef;
 
@@ -60,6 +64,15 @@ export class UsersManagerComponent {
             comfirm_password: ['',  [Validators.required]],
             validate_password: ['',  [Validators.required]],
         })
+
+        this.formCreateUserController = this.from.group({
+            user_name: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', Validators.required],
+            name: ['', Validators.required],
+            last_name: ['', Validators.required],
+            rol: ['', Validators.required],
+        });
     }
     
     ngOnInit() {
@@ -72,6 +85,19 @@ export class UsersManagerComponent {
                 this.isEnterPassword = false;
             }  
             this.showComfirmation();
+        })
+
+        WithAuthRequest(appConfigurations.userRolesList, {
+            method: 'GET',
+        }).then((response: any) => {
+            if(response.status){
+
+                const data = response.data;
+                
+                for(let i in data){
+                    this.dropdownItems.push({ name: data[i], code: i })
+                }
+            }
         })
     }
 
@@ -89,7 +115,6 @@ export class UsersManagerComponent {
     addUser(){
         this.useraddVisibleDialog = true;
     }
-
 
     loadTable(){
 
@@ -271,5 +296,44 @@ export class UsersManagerComponent {
         input.click();
     }
 
+    addNewUser(){
+        if(this.formCreateUserController.valid){
+
+            const formData = new FormData();
+
+            formData.set('user_name', this.formCreateUserController.get('user_name')?.value);
+            formData.set('email', this.formCreateUserController.get('email')?.value);
+            formData.set('password', this.formCreateUserController.get('password')?.value);
+            formData.set('name', this.formCreateUserController.get('name')?.value);
+            formData.set('last_name', this.formCreateUserController.get('last_name')?.value);
+            formData.set('rol', this.formCreateUserController.get('rol')?.value?.code);            
+
+            WithAuthRequest(appConfigurations.createNewUser, {
+                method: 'POST',
+            }, formData).then((response: any) => {
+                if(response.status){
+                    this.messageService.showSuccessViaToast('Success', 'User created');
+                    this.useraddVisibleDialog = false;
+                    this.loadTable();
+
+                    this.formCreateUserController.get('user_name').setValue('');
+                    this.formCreateUserController.get('email').setValue('');
+                    this.formCreateUserController.get('password').setValue('');
+                    this.formCreateUserController.get('name').setValue('');
+                    this.formCreateUserController.get('last_name').setValue('');
+                    this.formCreateUserController.get('rol').setValue('');
+
+                } else {
+                    this.messageService.showErrorViaToast('Error', response.msg);
+                }
+            }).catch((error) => {
+                this.messageService.showErrorViaToast('Error', error);
+                console.log(error);
+            })
+
+        } else {
+            this.messageService.showWarnViaToast('Alert', 'Form is not valid');
+        }
+    }
 
 }

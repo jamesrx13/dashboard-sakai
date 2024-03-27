@@ -17,6 +17,8 @@ export const appConfigurations = {
   userEdit: new URL('user/updateMyUser', apiMainUrl),
   userChangeStatus: new URL('user/changeStatus', apiMainUrl),
   customUserChangePassword: new URL('user/changeUserPassword', apiMainUrl),
+  userRolesList: new URL('user/rolesInformation', apiMainUrl),
+  createNewUser: new URL('user/registerCustomUser', apiMainUrl),
   // --- General ---
   applicationName: 'Dissof Dashboard',
   // --- LocalSorage ---
