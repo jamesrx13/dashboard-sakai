@@ -19,6 +19,11 @@ export const appConfigurations = {
   customUserChangePassword: new URL('user/changeUserPassword', apiMainUrl),
   userRolesList: new URL('user/rolesInformation', apiMainUrl),
   createNewUser: new URL('user/registerCustomUser', apiMainUrl),
+  listMyCustomsTokens: new URL('user/getMyCustomsTokens/', apiMainUrl),
+  changeTokenStatus: new URL('user/tokenChangeStatus', apiMainUrl),
+  deleteCustomToken: new URL('user/deleteToken', apiMainUrl),
+  listInformationToken: new URL('user/tokensInformation', apiMainUrl),
+  createCustomToken: new URL('user/generateToken', apiMainUrl),
   // --- General ---
   applicationName: 'Dissof Dashboard',
   // --- LocalSorage ---

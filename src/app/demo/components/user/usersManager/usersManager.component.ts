@@ -36,7 +36,7 @@ export class UsersManagerComponent {
     imageFileUpload: File;
     
     // Creación de usuarios
-    useraddVisibleDialog: boolean = true;
+    useraddVisibleDialog: boolean = false;
     formCreateUserController: FormGroup;
 
     dropdownItems: Array<UserRol> = [];
@@ -117,6 +117,12 @@ export class UsersManagerComponent {
     }
 
     loadTable(){
+
+        this.loading = true;
+
+        appConfigurations.userList.searchParams.delete('search');
+        appConfigurations.userList.searchParams.delete('countData');
+        appConfigurations.userList.searchParams.delete('page');
 
         if(this.filter){
             appConfigurations.userList.searchParams.append('search', this.filter.nativeElement.value);

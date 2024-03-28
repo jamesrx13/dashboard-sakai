@@ -14,6 +14,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SesionManagerRoutingModule } from './sesionManager-routing.module';
+import { PaginatorModule } from 'primeng/paginator';
+import { DialogModule } from 'primeng/dialog';
+import { TagModule } from 'primeng/tag';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
     imports: [
@@ -32,6 +37,11 @@ import { SesionManagerRoutingModule } from './sesionManager-routing.module';
 		InputTextModule,
 		ConfirmDialogModule,
 		ReactiveFormsModule,
+		PaginatorModule,
+		DialogModule,
+		TagModule, 
+		InputSwitchModule, 
+		TableModule,
     ],
     declarations: [SesionManagerComponent]
 })
