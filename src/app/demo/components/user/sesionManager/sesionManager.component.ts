@@ -29,7 +29,7 @@ interface TokenInformation {
 export class SesionManagerComponent{
 
     // Listado y páginación
-    countData: number = 1;
+    countData: number = 10;
     page: number = 1;
     totalPages: number = 0;
     loading: boolean = true;
